@@ -5,6 +5,7 @@ import { fondamentaSteps } from "@/data/prompt-content/fondamenta";
 import { generazioneCodiceSteps } from "@/data/prompt-content/generazione-codice";
 import { debuggingSteps } from "@/data/prompt-content/debugging";
 import { refactoringSteps } from "@/data/prompt-content/refactoring";
+import { comprensioneCodiceSteps } from "@/data/prompt-content/comprensione-codice";
 import { PromptStepCard } from "@/components/prompt/PromptStepCard";
 import { BookOpen, Wand2, Target, Zap } from "lucide-react";
 const PromptModulePage = () => {
@@ -28,6 +29,8 @@ const PromptModulePage = () => {
         return debuggingSteps;
       case "refactoring":
         return refactoringSteps;
+      case "comprensione-codice":
+        return comprensioneCodiceSteps;
       default:
         return null;
     }
@@ -111,13 +114,15 @@ const PromptModulePage = () => {
                       {slug === "fondamenta" ? "Tecniche di Prompting" : 
                        slug === "generazione-codice" ? "Tecniche Avanzate" :
                        slug === "debugging" ? "Tecniche di Debug" :
-                       "Tecniche di Refactoring"}
+                       slug === "refactoring" ? "Tecniche di Refactoring" :
+                       "Tecniche di Comprensione"}
                     </span>
                     <h3 className="text-xl font-bold text-foreground">
                       {steps.length} {slug === "fondamenta" ? "Tecniche Fondamentali" : 
                                        slug === "generazione-codice" ? "Tecniche di Generazione" :
                                        slug === "debugging" ? "Tecniche di Debugging" :
-                                       "Tecniche di Refactoring"}
+                                       slug === "refactoring" ? "Tecniche di Refactoring" :
+                                       "Tecniche di Comprensione"}
                     </h3>
                   </div>
                 </div>
@@ -129,7 +134,9 @@ const PromptModulePage = () => {
                     ? "Qui non stai più solo \"chiedendo codice\". Qui dirigi attivamente come il codice deve nascere, passo dopo passo, come farebbe uno sviluppatore esperto."
                     : slug === "debugging"
                     ? "In questo livello l'AI non serve a \"scrivere codice\", ma a ragionare sul codice che esiste già. L'obiettivo è individuare errori, capirne le cause e correggerli senza distruggere tutto."
-                    : "In questo livello l'obiettivo non è aggiungere funzionalità, ma migliorare ciò che già esiste: leggibilità, struttura, performance, scalabilità."
+                    : slug === "refactoring"
+                    ? "In questo livello l'obiettivo non è aggiungere funzionalità, ma migliorare ciò che già esiste: leggibilità, struttura, performance, scalabilità."
+                    : "In questo livello l'AI non serve più a scrivere o correggere codice, ma a capire codice. È il livello chiave per studio, onboarding, code review e insegnamento."
                   }
                 </p>
 
