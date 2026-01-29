@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Sparkles, Zap, ArrowRight } from "lucide-react";
+import { ChevronDown, Sparkles, Zap, ArrowRight, HelpCircle, AlertOctagon } from "lucide-react";
 import { useState } from "react";
 import { Step } from "@/data/module-content/mentalita";
 import { CodeBlock } from "./CodeBlock";
@@ -137,7 +137,7 @@ export const StepContent = ({ step, moduleId, isLast }: StepContentProps) => {
                 {/* Elegant divider */}
                 <div className="flex items-center gap-4">
                   <div className="flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-                  <Zap className="w-4 h-4 text-primary" />
+                  <Sparkles className="w-4 h-4 text-primary" />
                   <div className="flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
                 </div>
 
@@ -146,18 +146,47 @@ export const StepContent = ({ step, moduleId, isLast }: StepContentProps) => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
-                  className="relative pl-6 border-l-2 border-primary/30"
+                  className="relative"
                 >
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    {step.description}
-                  </p>
+                  <div className="p-6 rounded-xl bg-gradient-to-br from-muted/30 to-transparent border border-border/30">
+                    <p className="text-base text-foreground/90 leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
                 </motion.div>
+
+                {/* WHY section - NEW */}
+                {step.why && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.15 }}
+                    className="relative p-6 rounded-xl bg-gradient-to-br from-primary/5 via-transparent to-accent/5 border border-primary/20"
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                        <HelpCircle className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <span className="text-xs font-semibold text-primary uppercase tracking-wider">
+                          Perché è importante
+                        </span>
+                        <h4 className="text-sm font-bold text-foreground">
+                          La ragione dietro questo principio
+                        </h4>
+                      </div>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {step.why}
+                    </p>
+                  </motion.div>
+                )}
 
                 {/* Implementation steps - redesigned */}
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 }}
+                  transition={{ delay: 0.2 }}
                   className="rounded-xl bg-gradient-to-br from-muted/50 to-muted/20 p-6 border border-border/50"
                 >
                   <div className="flex items-center gap-3 mb-5">
@@ -180,7 +209,7 @@ export const StepContent = ({ step, moduleId, isLast }: StepContentProps) => {
                         key={i}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.2 + i * 0.1 }}
+                        transition={{ delay: 0.25 + i * 0.08 }}
                         className="flex items-start gap-4 group"
                       >
                         <div
@@ -235,6 +264,48 @@ export const StepContent = ({ step, moduleId, isLast }: StepContentProps) => {
                         moduleId={moduleId}
                       />
                     )}
+                  </motion.div>
+                )}
+
+                {/* Common Mistakes - NEW */}
+                {step.commonMistakes && step.commonMistakes.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.35 }}
+                    className="rounded-xl bg-gradient-to-br from-red-500/5 via-transparent to-orange-500/5 border border-red-500/20 p-6"
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center">
+                        <AlertOctagon className="w-5 h-5 text-red-400" />
+                      </div>
+                      <div>
+                        <span className="text-xs font-semibold text-red-400 uppercase tracking-wider">
+                          Attenzione
+                        </span>
+                        <h4 className="text-sm font-bold text-foreground">
+                          Errori comuni da evitare
+                        </h4>
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      {step.commonMistakes.map((mistake, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.4 + i * 0.05 }}
+                          className="flex items-start gap-3 p-3 rounded-lg bg-red-500/5 border border-red-500/10"
+                        >
+                          <div className="w-5 h-5 rounded-full bg-red-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span className="text-xs font-bold text-red-400">✕</span>
+                          </div>
+                          <p className="text-sm text-red-200/80 leading-relaxed">
+                            {mistake}
+                          </p>
+                        </motion.div>
+                      ))}
+                    </div>
                   </motion.div>
                 )}
 
