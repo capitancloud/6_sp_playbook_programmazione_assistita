@@ -2,6 +2,7 @@ import { useParams, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { getModuleBySlug } from "@/data/modules";
 import { mentalitaSteps } from "@/data/module-content/mentalita";
+import { ambienteSteps } from "@/data/module-content/ambiente";
 import { ModuleHeader } from "@/components/module/ModuleHeader";
 import { StepContent } from "@/components/module/StepContent";
 import { BookOpen, Sparkles, Target, Zap } from "lucide-react";
@@ -15,8 +16,19 @@ const ModulePage = () => {
   }
 
   // Check if this module has content
-  const hasContent = slug === "mentalita";
-  const steps = hasContent ? mentalitaSteps : null;
+  const getStepsForModule = (moduleSlug: string) => {
+    switch (moduleSlug) {
+      case "mentalita":
+        return mentalitaSteps;
+      case "ambiente":
+        return ambienteSteps;
+      default:
+        return null;
+    }
+  };
+  
+  const steps = slug ? getStepsForModule(slug) : null;
+  const hasContent = steps !== null;
 
   return (
     <div className="min-h-screen pb-12">
