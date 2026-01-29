@@ -24,6 +24,36 @@ export const StepContent = ({ step, moduleId, isLast }: StepContentProps) => {
   
   // Get the icon component or use a default
   const IconComponent = step.icon ?? FileCode;
+  
+  // Visual variety based on step number
+  const stepVariant = stepNumber % 4; // 0, 1, 2, 3 for 4 different styles
+  
+  const getCardStyle = () => {
+    if (!isExpanded) return "border-border/50 bg-card/80 hover:border-primary/30 hover:bg-card";
+    
+    switch (stepVariant) {
+      case 0:
+        return "border-primary/50 bg-gradient-to-br from-card via-card to-primary/5 shadow-xl shadow-primary/10";
+      case 1:
+        return "border-accent/50 bg-gradient-to-bl from-card via-accent/5 to-card shadow-xl shadow-accent/10";
+      case 2:
+        return "border-primary/40 bg-gradient-to-tr from-primary/5 via-card to-card shadow-xl shadow-primary/5";
+      case 3:
+        return "border-accent/40 bg-gradient-to-tl from-card to-accent/5 shadow-xl shadow-accent/5";
+      default:
+        return "border-primary/50 bg-gradient-to-br from-card via-card to-primary/5 shadow-xl shadow-primary/10";
+    }
+  };
+  
+  const getGlowPosition = () => {
+    switch (stepVariant) {
+      case 0: return "top-0 right-0";
+      case 1: return "bottom-0 left-0";
+      case 2: return "top-0 left-0";
+      case 3: return "bottom-0 right-0";
+      default: return "top-0 right-0";
+    }
+  };
 
   return (
     <motion.div
@@ -36,18 +66,18 @@ export const StepContent = ({ step, moduleId, isLast }: StepContentProps) => {
       <div
         className={cn(
           "relative rounded-2xl border-2 transition-all duration-500 overflow-hidden",
-          isExpanded
-            ? "border-primary/50 bg-gradient-to-br from-card via-card to-primary/5 shadow-xl shadow-primary/10"
-            : "border-border/50 bg-card/80 hover:border-primary/30 hover:bg-card"
+          getCardStyle()
         )}
       >
-        {/* Glow effect when expanded */}
+        {/* Glow effect when expanded - position varies by step */}
         {isExpanded && (
           <div className="absolute inset-0 pointer-events-none">
             <div
-              className="absolute top-0 right-0 w-1/2 h-1/2 opacity-30"
+              className={cn("absolute w-1/2 h-1/2 opacity-30", getGlowPosition())}
               style={{
-                background: `radial-gradient(ellipse at top right, hsl(var(--module-${moduleId}) / 0.4), transparent 70%)`,
+                background: stepVariant % 2 === 0
+                  ? `radial-gradient(ellipse, hsl(var(--module-${moduleId}) / 0.4), transparent 70%)`
+                  : `radial-gradient(ellipse, hsl(var(--accent) / 0.3), transparent 70%)`,
               }}
             />
           </div>
@@ -58,43 +88,69 @@ export const StepContent = ({ step, moduleId, isLast }: StepContentProps) => {
           onClick={() => setIsExpanded(!isExpanded)}
           className="w-full text-left p-6 flex items-start gap-5 relative z-10"
         >
-          {/* Step number and icon with gradient */}
+          {/* Step number and icon with gradient - varies by step */}
           <div className="relative">
             <div
               className={cn(
-                "w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0",
+                "w-14 h-14 flex items-center justify-center flex-shrink-0",
                 "transition-all duration-500 relative overflow-hidden",
-                isExpanded ? "scale-110" : "scale-100"
+                isExpanded ? "scale-110" : "scale-100",
+                // Different shapes based on stepVariant
+                stepVariant === 0 && "rounded-2xl",
+                stepVariant === 1 && "rounded-full",
+                stepVariant === 2 && "rounded-xl",
+                stepVariant === 3 && "rounded-3xl"
               )}
               style={{
                 background: isExpanded
-                  ? `linear-gradient(135deg, hsl(var(--module-${moduleId})), hsl(var(--module-${moduleId}) / 0.7))`
+                  ? stepVariant % 2 === 0
+                    ? `linear-gradient(135deg, hsl(var(--module-${moduleId})), hsl(var(--module-${moduleId}) / 0.7))`
+                    : `linear-gradient(225deg, hsl(var(--module-${moduleId}) / 0.8), hsl(var(--accent) / 0.6))`
                   : `hsl(var(--muted))`,
                 color: isExpanded ? "hsl(var(--primary-foreground))" : "hsl(var(--muted-foreground))",
               }}
             >
-              {/* Shine effect */}
+              {/* Shine effect - different directions */}
               {isExpanded && (
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_2s_infinite]" />
+                <div 
+                  className={cn(
+                    "absolute inset-0 animate-[shimmer_2s_infinite]",
+                    stepVariant % 2 === 0 
+                      ? "bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full"
+                      : "bg-gradient-to-b from-transparent via-white/15 to-transparent -translate-y-full"
+                  )} 
+                />
               )}
               <IconComponent className="w-6 h-6 relative z-10" />
             </div>
             
-            {/* Step number badge */}
+            {/* Step number badge - different positions */}
             <div
               className={cn(
-                "absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border-2 border-card",
+                "absolute w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border-2 border-card",
                 isExpanded
                   ? "bg-primary text-primary-foreground"
-                  : "bg-muted-foreground/20 text-muted-foreground"
+                  : "bg-muted-foreground/20 text-muted-foreground",
+                // Different positions
+                stepVariant === 0 && "-top-1 -right-1",
+                stepVariant === 1 && "-top-1 -left-1",
+                stepVariant === 2 && "-bottom-1 -right-1",
+                stepVariant === 3 && "-bottom-1 -left-1"
               )}
             >
               {stepNumber}
             </div>
             
-            {/* Connecting dot */}
+            {/* Connecting line - different styles */}
             {!isLast && (
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-1 h-6 bg-gradient-to-b from-border to-transparent" />
+              <div 
+                className={cn(
+                  "absolute -bottom-8 left-1/2 -translate-x-1/2 w-1 h-6",
+                  stepVariant % 2 === 0 
+                    ? "bg-gradient-to-b from-border to-transparent"
+                    : "bg-gradient-to-b from-primary/20 to-transparent"
+                )} 
+              />
             )}
           </div>
 
