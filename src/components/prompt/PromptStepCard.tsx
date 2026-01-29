@@ -49,14 +49,26 @@ export const PromptStepCard = ({ step, index }: PromptStepCardProps) => {
         </div>
 
         {/* Description */}
-        <div className="mb-8">
-          <div className="prose prose-sm prose-invert max-w-none">
-            {step.description.split('\n\n').map((paragraph, i) => (
-              <p key={i} className="text-muted-foreground leading-relaxed mb-3 last:mb-0">
+        <div className="mb-8 space-y-4">
+          {step.description.split('\n\n').map((paragraph, i) => {
+            // Check if paragraph starts with **Title:**
+            const match = paragraph.match(/^\*\*([^*]+):\*\*\s*(.*)/s);
+            if (match) {
+              return (
+                <div key={i} className="space-y-1">
+                  <h4 className="text-sm font-semibold text-accent">{match[1]}</h4>
+                  <p className="text-muted-foreground leading-relaxed text-sm">
+                    {match[2]}
+                  </p>
+                </div>
+              );
+            }
+            return (
+              <p key={i} className="text-muted-foreground leading-relaxed text-sm">
                 {paragraph}
               </p>
-            ))}
-          </div>
+            );
+          })}
         </div>
 
         {/* Prompt boxes */}
