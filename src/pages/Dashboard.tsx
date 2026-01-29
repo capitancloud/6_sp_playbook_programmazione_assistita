@@ -39,7 +39,7 @@ const Dashboard = () => {
               <BookOpen className="w-5 h-5 text-primary-foreground" />
             </div>
             <span className="text-sm font-medium text-primary animate-fade-in">
-              Playbook Interattivo
+              🇮🇹 Prima Piattaforma in Italia
             </span>
           </div>
 
@@ -48,9 +48,17 @@ const Dashboard = () => {
             <span className="text-gradient block">dall'AI</span>
           </h1>
 
-          <p className="text-lg text-muted-foreground max-w-2xl mb-8 animate-fade-in" style={{ animationDelay: "100ms" }}>
-            Un metodo operativo strutturato per lavorare efficacemente con l'intelligenza artificiale.
-            Naviga liberamente tra i moduli e costruisci il tuo workflow.
+          <p className="text-lg text-muted-foreground max-w-2xl mb-6 animate-fade-in" style={{ animationDelay: "100ms" }}>
+            <strong className="text-foreground">75 tecniche operative pronte all'uso.</strong> Niente teoria astratta: 
+            solo prompt reali, strutture collaudate e metodi che funzionano davvero.
+          </p>
+          
+          <p className="text-base text-muted-foreground max-w-2xl mb-8 animate-fade-in" style={{ animationDelay: "150ms" }}>
+            Il primo playbook interattivo italiano per chi vuole programmare con l'AI 
+            in modo <span className="text-primary font-semibold">professionale</span>, 
+            <span className="text-primary font-semibold"> efficace</span> e 
+            <span className="text-primary font-semibold"> senza perdere tempo</span>.
+            Copia, adatta, usa. Subito.
           </p>
 
           {/* Quick stats */}
