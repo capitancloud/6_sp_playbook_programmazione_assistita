@@ -37,6 +37,8 @@ export interface Step {
 export const mentalitaSteps: Step[] = [
   {
     id: 1,
+    number: 1,
+    icon: Lightbulb,
     title: "Entrare in modalità intenzionale",
     subtitle: "Prima ancora di aprire l'editor",
     description: "Prima ancora di aprire VS Code, IntelliJ o qualunque editor, fermati. La tentazione di saltare subito nel codice è forte, ma è esattamente questo che porta a sessioni caotiche e improduttive. La modalità intenzionale significa sapere esattamente cosa vuoi ottenere prima di iniziare a interagire con l'AI.",
@@ -73,6 +75,8 @@ export const mentalitaSteps: Step[] = [
   },
   {
     id: 2,
+    number: 2,
+    icon: GitMerge,
     title: "Separare creatività e improvvisazione",
     subtitle: "Non incollare mai subito",
     description: "L'AI ti propone una soluzione. Sembra buona. Il cursore lampeggia, pronto a incollare. STOP. Questo è il momento più pericoloso di tutta la sessione. L'impulso a incollare subito è fortissimo, ma è esattamente qui che perdi il controllo. Separare creatività (pensare alternative) da improvvisazione (accettare la prima cosa che arriva) è la differenza tra programmare con l'AI e farsi programmare dall'AI.",
@@ -114,6 +118,8 @@ export const mentalitaSteps: Step[] = [
   },
   {
     id: 3,
+    number: 3,
+    icon: Target,
     title: "Definire l'obiettivo prima di iniziare",
     subtitle: "Frasi verificabili, non intenti vaghi",
     description: "C'è una differenza enorme tra 'voglio gestire meglio gli errori' e 'quando l'utente inserisce un'email invalida, il sistema mostra il messaggio X e non salva nulla nel database'. La prima è un desiderio. La seconda è un obiettivo verificabile. Gli obiettivi vaghi portano a sessioni infinite dove non sai mai se hai finito. Gli obiettivi verificabili ti dicono esattamente quando fermarti.",
@@ -162,6 +168,8 @@ export const mentalitaSteps: Step[] = [
   },
   {
     id: 4,
+    number: 4,
+    icon: FileEdit,
     title: "Accettare il codice imperfetto come bozza",
     subtitle: "Ogni output AI è una BOZZA",
     description: "L'AI ti dà codice che funziona. Fantastico. Ma 'funziona' non significa 'è pronto'. Ogni singolo output dell'AI va trattato come una bozza, una prima versione da rivedere e migliorare. Il problema non è il codice dell'AI - il problema è quando inizi a difenderlo come se fosse tuo, solo perché 'ormai funziona'.",
@@ -198,6 +206,8 @@ export const mentalitaSteps: Step[] = [
   },
   {
     id: 5,
+    number: 5,
+    icon: Shield,
     title: "Tenere sotto controllo l'ego tecnico",
     subtitle: "Saprei spiegarlo senza guardare l'AI?",
     description: "Hai incollato il codice. Funziona. Ti senti produttivo. Ma fermati un secondo e fatti questa domanda, ad alta voce se necessario: 'Saprei spiegare questo codice a un collega senza guardare la risposta dell'AI?' Se la risposta è no, quel codice non è tuo. L'hai solo copiato. E codice copiato senza comprensione è un debito tecnico che pagherai con gli interessi.",
@@ -238,6 +248,8 @@ export const mentalitaSteps: Step[] = [
   },
   {
     id: 6,
+    number: 6,
+    icon: RefreshCw,
     title: "Lavorare per cicli brevi e verificabili",
     subtitle: "Micro-cicli, quasi banali",
     description: "La tentazione è fare 'tutto insieme' - un grande prompt, una grande risposta, un grande blocco di codice. Resisti. I cicli di lavoro devono essere piccoli, quasi banali. Così piccoli che ti sembra di perdere tempo. Ma non lo stai perdendo: stai costruendo su fondamenta solide invece che su sabbie mobili.",
@@ -279,6 +291,8 @@ export const mentalitaSteps: Step[] = [
   },
   {
     id: 7,
+    number: 7,
+    icon: StopCircle,
     title: "Riconoscere il momento giusto per fermarsi",
     subtitle: "Regola meccanica, non emotiva",
     description: "C'è un momento in ogni sessione dove l'AI smette di essere utile. Le risposte diventano più lunghe ma meno precise. I miglioramenti sono marginali. Stai 'spremendo' l'AI cercando la risposta perfetta che non arriverà mai. Riconoscere questo momento e fermarsi è una delle skill più importanti - e più difficili - della programmazione AI-assistita.",
@@ -320,6 +334,8 @@ export const mentalitaSteps: Step[] = [
   },
   {
     id: 8,
+    number: 8,
+    icon: BarChart3,
     title: "Distinguere produttività da confusione",
     subtitle: "Obbligo di sintesi",
     description: "Hai scritto molto codice. Ti senti produttivo. Ma fermati: sai davvero cosa fa quel codice? La produttività vera è codice che capisci e che risolve un problema. La falsa produttività è tanto codice che 'sembra funzionare' ma che non sapresti spiegare. Il test della sintesi smaschera immediatamente la differenza.",
@@ -359,6 +375,8 @@ export const mentalitaSteps: Step[] = [
   },
   {
     id: 9,
+    number: 9,
+    icon: TrendingUp,
     title: "Fidarsi del processo, non del risultato immediato",
     subtitle: "Anche se funziona, pianifica il prossimo step",
     description: "Il codice funziona. Tentazione fortissima: dichiarare vittoria e passare ad altro. Ma 'funziona' è solo l'inizio, non la fine. Il codice che 'funziona e basta' è sempre provvisorio. Il codice professionale è quello che non solo funziona, ma è chiaro, testato, mantenibile. Pianificare l'iterazione successiva ti mantiene in controllo e trasforma il codice in un processo evolutivo.",
@@ -394,6 +412,8 @@ export const mentalitaSteps: Step[] = [
   },
   {
     id: 10,
+    number: 10,
+    icon: CheckCircle2,
     title: "Chiudere ogni sessione in modo consapevole",
     subtitle: "Una sola etichetta: valido, da migliorare, da scartare",
     description: "La sessione finisce. Chiudi tutto e passi ad altro. Ma aspetta - in che stato è il codice che hai scritto? È pronto per la produzione? Ha bisogno di altro lavoro? È da buttare? Senza una chiusura esplicita, queste domande restano sospese e tornano a tormentarti. Una semplice etichetta chiude il loop cognitivo e rende il lavoro tracciabile.",
