@@ -32,7 +32,7 @@ export const modules: Module[] = [
     description: "Approccio mentale e filosofia operativa per lavorare efficacemente con l'AI.",
     icon: Brain,
     status: "coming-soon",
-    estimatedSteps: 8,
+    estimatedSteps: 10,
   },
   {
     id: 2,
@@ -42,7 +42,7 @@ export const modules: Module[] = [
     description: "Setup tecnico e organizzazione dello spazio di lavoro ottimale.",
     icon: Settings,
     status: "coming-soon",
-    estimatedSteps: 6,
+    estimatedSteps: 10,
   },
   {
     id: 3,
@@ -52,7 +52,7 @@ export const modules: Module[] = [
     description: "Definizione degli obiettivi e pianificazione prima di scrivere codice.",
     icon: FileText,
     status: "coming-soon",
-    estimatedSteps: 7,
+    estimatedSteps: 10,
   },
   {
     id: 4,
@@ -72,7 +72,7 @@ export const modules: Module[] = [
     description: "Tecniche per mantenere controllo e qualità durante lo sviluppo.",
     icon: Code,
     status: "coming-soon",
-    estimatedSteps: 9,
+    estimatedSteps: 10,
   },
   {
     id: 6,
@@ -82,7 +82,7 @@ export const modules: Module[] = [
     description: "Identificazione e prevenzione degli errori più frequenti.",
     icon: AlertTriangle,
     status: "coming-soon",
-    estimatedSteps: 8,
+    estimatedSteps: 10,
   },
   {
     id: 7,
@@ -92,7 +92,7 @@ export const modules: Module[] = [
     description: "Verifica e validazione del codice prodotto con l'AI.",
     icon: TestTube,
     status: "coming-soon",
-    estimatedSteps: 6,
+    estimatedSteps: 10,
   },
   {
     id: 8,
@@ -102,7 +102,7 @@ export const modules: Module[] = [
     description: "Pratiche di sicurezza specifiche per lo sviluppo AI-assistito.",
     icon: Shield,
     status: "coming-soon",
-    estimatedSteps: 7,
+    estimatedSteps: 10,
   },
   {
     id: 9,
@@ -112,7 +112,7 @@ export const modules: Module[] = [
     description: "Organizzazione e documentazione dopo le sessioni di lavoro.",
     icon: Archive,
     status: "coming-soon",
-    estimatedSteps: 5,
+    estimatedSteps: 10,
   },
   {
     id: 10,
@@ -122,7 +122,7 @@ export const modules: Module[] = [
     description: "Miglioramento continuo e adattamento del proprio metodo.",
     icon: TrendingUp,
     status: "coming-soon",
-    estimatedSteps: 6,
+    estimatedSteps: 10,
   },
 ];
 
