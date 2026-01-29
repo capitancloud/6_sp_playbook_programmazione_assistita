@@ -57,8 +57,8 @@ export const promptEngineeringModules: PromptModule[] = [
     shortTitle: "Refactoring",
     description: "Strategie per migliorare la qualità del codice esistente con l'assistenza dell'AI.",
     icon: Sparkles,
-    status: "coming-soon",
-    estimatedSteps: 9,
+    status: "complete",
+    estimatedSteps: 14,
   },
   {
     id: 5,
