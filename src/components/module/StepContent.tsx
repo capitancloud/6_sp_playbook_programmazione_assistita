@@ -216,7 +216,7 @@ export const StepContent = ({ step, moduleId, isLast }: StepContentProps) => {
                   <div className="flex-1 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
                 </div>
 
-                {/* Description with highlight */}
+                {/* Description with highlight - formatted paragraphs */}
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -224,9 +224,31 @@ export const StepContent = ({ step, moduleId, isLast }: StepContentProps) => {
                   className="relative"
                 >
                   <div className="p-6 rounded-xl bg-gradient-to-br from-muted/30 to-transparent border border-border/30">
-                    <p className="text-base text-foreground/90 leading-relaxed">
-                      {step.description}
-                    </p>
+                    <div className="space-y-4">
+                      {step.description.split('\n\n').map((paragraph, idx) => (
+                        <p key={idx} className="text-base text-foreground/90 leading-relaxed">
+                          {paragraph.split(/(\*\*[^*]+\*\*|"[^"]+")/).map((part, partIdx) => {
+                            // Bold text with **
+                            if (part.startsWith('**') && part.endsWith('**')) {
+                              return (
+                                <strong key={partIdx} className="font-semibold text-foreground">
+                                  {part.slice(2, -2)}
+                                </strong>
+                              );
+                            }
+                            // Quoted text with ""
+                            if (part.startsWith('"') && part.endsWith('"')) {
+                              return (
+                                <span key={partIdx} className="text-primary font-medium italic">
+                                  {part}
+                                </span>
+                              );
+                            }
+                            return part;
+                          })}
+                        </p>
+                      ))}
+                    </div>
                   </div>
                 </motion.div>
 
@@ -251,9 +273,29 @@ export const StepContent = ({ step, moduleId, isLast }: StepContentProps) => {
                         </h4>
                       </div>
                     </div>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {step.why}
-                    </p>
+                    <div className="space-y-3">
+                      {step.why.split('\n\n').map((paragraph, idx) => (
+                        <p key={idx} className="text-sm text-muted-foreground leading-relaxed">
+                          {paragraph.split(/(\*\*[^*]+\*\*|"[^"]+")/).map((part, partIdx) => {
+                            if (part.startsWith('**') && part.endsWith('**')) {
+                              return (
+                                <strong key={partIdx} className="font-semibold text-foreground">
+                                  {part.slice(2, -2)}
+                                </strong>
+                              );
+                            }
+                            if (part.startsWith('"') && part.endsWith('"')) {
+                              return (
+                                <span key={partIdx} className="text-primary font-medium">
+                                  {part}
+                                </span>
+                              );
+                            }
+                            return part;
+                          })}
+                        </p>
+                      ))}
+                    </div>
                   </motion.div>
                 )}
 
