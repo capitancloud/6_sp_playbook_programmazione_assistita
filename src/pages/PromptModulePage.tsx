@@ -2,8 +2,9 @@ import { useParams, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { getPromptModuleBySlug } from "@/data/prompt-engineering-modules";
 import { fondamentaSteps } from "@/data/prompt-content/fondamenta";
+import { generazioneCodiceSteps } from "@/data/prompt-content/generazione-codice";
 import { PromptStepCard } from "@/components/prompt/PromptStepCard";
-import { BookOpen, Wand2, Target, Zap, MessageSquare } from "lucide-react";
+import { BookOpen, Wand2, Target, Zap, MessageSquare, Code2 } from "lucide-react";
 
 const PromptModulePage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -20,6 +21,8 @@ const PromptModulePage = () => {
     switch (moduleSlug) {
       case "fondamenta":
         return fondamentaSteps;
+      case "generazione-codice":
+        return generazioneCodiceSteps;
       default:
         return null;
     }
@@ -96,21 +99,23 @@ const PromptModulePage = () => {
               <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center">
-                    <MessageSquare className="w-6 h-6 text-accent" />
+                    <Icon className="w-6 h-6 text-accent" />
                   </div>
                   <div>
                     <span className="text-xs font-semibold text-accent uppercase tracking-wider">
-                      Tecniche di Prompting
+                      {slug === "fondamenta" ? "Tecniche di Prompting" : "Tecniche Avanzate"}
                     </span>
                     <h3 className="text-xl font-bold text-foreground">
-                      {steps.length} Tecniche Fondamentali
+                      {steps.length} {slug === "fondamenta" ? "Tecniche Fondamentali" : "Tecniche di Generazione"}
                     </h3>
                   </div>
                 </div>
 
                 <p className="text-muted-foreground leading-relaxed mb-6 max-w-2xl">
-                  Queste tecniche servono a evitare codice confuso, risposte vaghe e soluzioni inutilizzabili.
-                  Qui stai insegnando all'AI in che contesto tecnico esiste e come deve ragionare.
+                  {slug === "fondamenta" 
+                    ? "Queste tecniche servono a evitare codice confuso, risposte vaghe e soluzioni inutilizzabili. Qui stai insegnando all'AI in che contesto tecnico esiste e come deve ragionare."
+                    : "Qui non stai più solo \"chiedendo codice\". Qui dirigi attivamente come il codice deve nascere, passo dopo passo, come farebbe uno sviluppatore esperto."
+                  }
                 </p>
 
                 {/* Stats */}

@@ -37,8 +37,8 @@ export const promptEngineeringModules: PromptModule[] = [
     shortTitle: "Generazione Codice",
     description: "Tecniche per ottenere codice di qualità attraverso prompt mirati e strutturati.",
     icon: Code2,
-    status: "coming-soon",
-    estimatedSteps: 10,
+    status: "complete",
+    estimatedSteps: 13,
   },
   {
     id: 3,
