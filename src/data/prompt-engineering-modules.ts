@@ -47,8 +47,8 @@ export const promptEngineeringModules: PromptModule[] = [
     shortTitle: "Debugging",
     description: "Come utilizzare l'AI per identificare, analizzare e risolvere bug nel codice.",
     icon: Bug,
-    status: "coming-soon",
-    estimatedSteps: 8,
+    status: "complete",
+    estimatedSteps: 12,
   },
   {
     id: 4,
