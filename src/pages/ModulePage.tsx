@@ -5,6 +5,7 @@ import { mentalitaSteps } from "@/data/module-content/mentalita";
 import { ambienteSteps } from "@/data/module-content/ambiente";
 import { chiarezzaSteps } from "@/data/module-content/chiarezza";
 import { bestPracticeSteps } from "@/data/module-content/best-practice";
+import { flowControllatoSteps } from "@/data/module-content/flow-controllato";
 import { ModuleHeader } from "@/components/module/ModuleHeader";
 import { StepContent } from "@/components/module/StepContent";
 import { BookOpen, Sparkles, Target, Zap } from "lucide-react";
@@ -28,6 +29,8 @@ const ModulePage = () => {
         return chiarezzaSteps;
       case "best-practice":
         return bestPracticeSteps;
+      case "flow-controllato":
+        return flowControllatoSteps;
       default:
         return null;
     }
