@@ -6,6 +6,7 @@ import { generazioneCodiceSteps } from "@/data/prompt-content/generazione-codice
 import { debuggingSteps } from "@/data/prompt-content/debugging";
 import { refactoringSteps } from "@/data/prompt-content/refactoring";
 import { comprensioneCodiceSteps } from "@/data/prompt-content/comprensione-codice";
+import { pairProgrammingSteps } from "@/data/prompt-content/pair-programming";
 import { PromptStepCard } from "@/components/prompt/PromptStepCard";
 import { BookOpen, Wand2, Target, Zap } from "lucide-react";
 const PromptModulePage = () => {
@@ -31,6 +32,8 @@ const PromptModulePage = () => {
         return refactoringSteps;
       case "comprensione-codice":
         return comprensioneCodiceSteps;
+      case "pair-programming":
+        return pairProgrammingSteps;
       default:
         return null;
     }
@@ -115,14 +118,16 @@ const PromptModulePage = () => {
                        slug === "generazione-codice" ? "Tecniche Avanzate" :
                        slug === "debugging" ? "Tecniche di Debug" :
                        slug === "refactoring" ? "Tecniche di Refactoring" :
-                       "Tecniche di Comprensione"}
+                       slug === "comprensione-codice" ? "Tecniche di Comprensione" :
+                       "Tecniche Professionali"}
                     </span>
                     <h3 className="text-xl font-bold text-foreground">
                       {steps.length} {slug === "fondamenta" ? "Tecniche Fondamentali" : 
                                        slug === "generazione-codice" ? "Tecniche di Generazione" :
                                        slug === "debugging" ? "Tecniche di Debugging" :
                                        slug === "refactoring" ? "Tecniche di Refactoring" :
-                                       "Tecniche di Comprensione"}
+                                       slug === "comprensione-codice" ? "Tecniche di Comprensione" :
+                                       "Tecniche di Collaborazione"}
                     </h3>
                   </div>
                 </div>
@@ -136,7 +141,9 @@ const PromptModulePage = () => {
                     ? "In questo livello l'AI non serve a \"scrivere codice\", ma a ragionare sul codice che esiste già. L'obiettivo è individuare errori, capirne le cause e correggerli senza distruggere tutto."
                     : slug === "refactoring"
                     ? "In questo livello l'obiettivo non è aggiungere funzionalità, ma migliorare ciò che già esiste: leggibilità, struttura, performance, scalabilità."
-                    : "In questo livello l'AI non serve più a scrivere o correggere codice, ma a capire codice. È il livello chiave per studio, onboarding, code review e insegnamento."
+                    : slug === "comprensione-codice"
+                    ? "In questo livello l'AI non serve più a scrivere o correggere codice, ma a capire codice. È il livello chiave per studio, onboarding, code review e insegnamento."
+                    : "Qui non chiedi più output singoli. Qui orchestri il comportamento dell'AI nel tempo, costruendo una collaborazione professionale e continuativa."
                   }
                 </p>
 

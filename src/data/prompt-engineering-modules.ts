@@ -77,8 +77,8 @@ export const promptEngineeringModules: PromptModule[] = [
     shortTitle: "Pair Programming",
     description: "Tecniche avanzate di collaborazione continua con l'AI durante lo sviluppo.",
     icon: Users,
-    status: "coming-soon",
-    estimatedSteps: 8,
+    status: "complete",
+    estimatedSteps: 15,
   },
 ];
 
