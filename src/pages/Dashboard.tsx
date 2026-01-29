@@ -43,10 +43,14 @@ const Dashboard = () => {
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 animate-fade-in">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-3 animate-fade-in">
             Programmazione Assistita
             <span className="text-gradient block">dall'AI</span>
           </h1>
+
+          <p className="text-xl md:text-2xl font-bold text-primary mb-6 animate-fade-in uppercase tracking-wide" style={{ animationDelay: "50ms" }}>
+            🚀 La piattaforma pratica per diventare un super programmatore!
+          </p>
 
           <p className="text-lg text-muted-foreground max-w-2xl mb-6 animate-fade-in" style={{ animationDelay: "100ms" }}>
             <strong className="text-foreground">75 tecniche operative pronte all'uso.</strong> Niente teoria astratta: 
