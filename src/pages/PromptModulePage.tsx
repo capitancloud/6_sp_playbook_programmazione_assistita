@@ -1,7 +1,9 @@
 import { useParams, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { getPromptModuleBySlug } from "@/data/prompt-engineering-modules";
-import { BookOpen, Wand2 } from "lucide-react";
+import { fondamentaSteps } from "@/data/prompt-content/fondamenta";
+import { PromptStepCard } from "@/components/prompt/PromptStepCard";
+import { BookOpen, Wand2, Target, Zap, MessageSquare } from "lucide-react";
 
 const PromptModulePage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -12,6 +14,19 @@ const PromptModulePage = () => {
   }
 
   const Icon = module.icon;
+
+  // Get steps for this module
+  const getStepsForModule = (moduleSlug: string) => {
+    switch (moduleSlug) {
+      case "fondamenta":
+        return fondamentaSteps;
+      default:
+        return null;
+    }
+  };
+
+  const steps = slug ? getStepsForModule(slug) : null;
+  const hasContent = steps !== null;
 
   return (
     <div className="min-h-screen pb-12">
@@ -64,25 +79,116 @@ const PromptModulePage = () => {
 
       {/* Content area */}
       <div className="p-6 md:p-8">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="p-8 rounded-2xl bg-gradient-to-br from-card to-accent/5 border border-accent/20 text-center"
-          >
-            <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-4">
-              <BookOpen className="w-8 h-8 text-accent" />
+        {hasContent && steps ? (
+          <div className="max-w-4xl mx-auto">
+            {/* Intro card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="relative overflow-hidden p-8 rounded-2xl bg-gradient-to-br from-card via-card to-accent/5 border border-accent/20 mb-10"
+            >
+              {/* Animated background elements */}
+              <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl animate-pulse-glow" />
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/10 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "1s" }} />
+              </div>
+
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center">
+                    <MessageSquare className="w-6 h-6 text-accent" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-semibold text-accent uppercase tracking-wider">
+                      Tecniche di Prompting
+                    </span>
+                    <h3 className="text-xl font-bold text-foreground">
+                      {steps.length} Tecniche Fondamentali
+                    </h3>
+                  </div>
+                </div>
+
+                <p className="text-muted-foreground leading-relaxed mb-6 max-w-2xl">
+                  Queste tecniche servono a evitare codice confuso, risposte vaghe e soluzioni inutilizzabili.
+                  Qui stai insegnando all'AI in che contesto tecnico esiste e come deve ragionare.
+                </p>
+
+                {/* Stats */}
+                <div className="flex flex-wrap gap-6">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
+                      <Target className="w-4 h-4 text-accent" />
+                    </div>
+                    <div>
+                      <span className="text-lg font-bold text-foreground">{steps.length}</span>
+                      <span className="text-sm text-muted-foreground ml-1">tecniche</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
+                      <Zap className="w-4 h-4 text-accent" />
+                    </div>
+                    <div>
+                      <span className="text-lg font-bold text-foreground">~10</span>
+                      <span className="text-sm text-muted-foreground ml-1">min lettura</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
+                      <BookOpen className="w-4 h-4 text-accent" />
+                    </div>
+                    <div>
+                      <span className="text-lg font-bold text-foreground">Copiabili</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Steps */}
+            <div className="space-y-6">
+              {steps.map((step, index) => (
+                <PromptStepCard key={step.id} step={step} index={index} />
+              ))}
             </div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">
-              Contenuti in preparazione
-            </h3>
-            <p className="text-muted-foreground max-w-md mx-auto">
-              I contenuti dettagliati di questo modulo sono in fase di sviluppo. 
-              Torna presto per trovare tecniche pratiche di prompt engineering, 
-              esempi e guide interattive.
-            </p>
-          </motion.div>
-        </div>
+
+            {/* Bottom CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-accent/10 via-primary/10 to-accent/10 border border-accent/20 text-center"
+            >
+              <h4 className="text-lg font-semibold text-foreground mb-2">
+                Tecniche pronte all'uso! 🚀
+              </h4>
+              <p className="text-sm text-muted-foreground">
+                Copia i prompt e adattali al tuo contesto specifico.
+              </p>
+            </motion.div>
+          </div>
+        ) : (
+          // Placeholder content for other modules
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-8 rounded-2xl bg-gradient-to-br from-card to-accent/5 border border-accent/20 text-center"
+            >
+              <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                <BookOpen className="w-8 h-8 text-accent" />
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-2">
+                Contenuti in preparazione
+              </h3>
+              <p className="text-muted-foreground max-w-md mx-auto">
+                I contenuti dettagliati di questo modulo sono in fase di sviluppo. 
+                Torna presto per trovare tecniche pratiche di prompt engineering, 
+                esempi e guide interattive.
+              </p>
+            </motion.div>
+          </div>
+        )}
       </div>
     </div>
   );

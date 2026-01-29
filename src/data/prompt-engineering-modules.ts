@@ -27,8 +27,8 @@ export const promptEngineeringModules: PromptModule[] = [
     shortTitle: "Fondamenta",
     description: "Le basi essenziali per comunicare efficacemente con l'AI nel contesto dello sviluppo software.",
     icon: MessageSquare,
-    status: "coming-soon",
-    estimatedSteps: 8,
+    status: "complete",
+    estimatedSteps: 11,
   },
   {
     id: 2,
