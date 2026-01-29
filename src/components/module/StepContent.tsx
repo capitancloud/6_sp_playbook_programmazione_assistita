@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Sparkles, Zap, ArrowRight, HelpCircle, AlertOctagon } from "lucide-react";
 import { useState } from "react";
 import { Step } from "@/data/module-content/mentalita";
+import { FileCode } from "lucide-react";
 import { CodeBlock } from "./CodeBlock";
 import { RuleCard } from "./RuleCard";
 import { ComparisonBlock } from "./ComparisonBlock";
@@ -17,12 +18,18 @@ interface StepContentProps {
 
 export const StepContent = ({ step, moduleId, isLast }: StepContentProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  
+  // Get the step number (handle both formats)
+  const stepNumber = step.number ?? (typeof step.id === 'number' ? step.id : 0);
+  
+  // Get the icon component or use a default
+  const IconComponent = step.icon ?? FileCode;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: step.id * 0.03 }}
+      transition={{ duration: 0.4, delay: stepNumber * 0.03 }}
       className="relative"
     >
       {/* Step card */}
@@ -51,12 +58,12 @@ export const StepContent = ({ step, moduleId, isLast }: StepContentProps) => {
           onClick={() => setIsExpanded(!isExpanded)}
           className="w-full text-left p-6 flex items-start gap-5 relative z-10"
         >
-          {/* Step number with gradient */}
+          {/* Step number and icon with gradient */}
           <div className="relative">
             <div
               className={cn(
                 "w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0",
-                "font-bold text-lg transition-all duration-500 relative overflow-hidden",
+                "transition-all duration-500 relative overflow-hidden",
                 isExpanded ? "scale-110" : "scale-100"
               )}
               style={{
@@ -70,7 +77,19 @@ export const StepContent = ({ step, moduleId, isLast }: StepContentProps) => {
               {isExpanded && (
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_2s_infinite]" />
               )}
-              <span className="relative z-10">{String(step.id).padStart(2, "0")}</span>
+              <IconComponent className="w-6 h-6 relative z-10" />
+            </div>
+            
+            {/* Step number badge */}
+            <div
+              className={cn(
+                "absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border-2 border-card",
+                isExpanded
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-muted-foreground/20 text-muted-foreground"
+              )}
+            >
+              {stepNumber}
             </div>
             
             {/* Connecting dot */}
@@ -232,7 +251,7 @@ export const StepContent = ({ step, moduleId, isLast }: StepContentProps) => {
                   </div>
                 </motion.div>
 
-                {/* Example */}
+                {/* Example - handles both old (example) and new (codeExample, comparison) formats */}
                 {step.example && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
@@ -264,6 +283,51 @@ export const StepContent = ({ step, moduleId, isLast }: StepContentProps) => {
                         moduleId={moduleId}
                       />
                     )}
+                  </motion.div>
+                )}
+
+                {/* Code Example - new format */}
+                {step.codeExample && !step.example && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <CodeBlock
+                      code={step.codeExample.code}
+                      language={step.codeExample.language}
+                      filename={step.codeExample.filename}
+                      moduleId={moduleId}
+                    />
+                  </motion.div>
+                )}
+
+                {/* Comparison - new format */}
+                {step.comparison && !step.example && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.32 }}
+                  >
+                    <ComparisonBlock
+                      left={{ label: "❌ Sbagliato", items: step.comparison.wrong }}
+                      right={{ label: "✓ Corretto", items: step.comparison.correct }}
+                    />
+                  </motion.div>
+                )}
+
+                {/* Checklist - new format */}
+                {step.checklist && !step.example && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.34 }}
+                  >
+                    <ChecklistCard
+                      title={step.checklist.title}
+                      items={step.checklist.items.map(text => ({ text, checked: false }))}
+                      moduleId={moduleId}
+                    />
                   </motion.div>
                 )}
 

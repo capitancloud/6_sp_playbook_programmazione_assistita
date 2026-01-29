@@ -8,39 +8,9 @@ import {
   GitBranch, 
   RotateCcw, 
   FileText, 
-  Bomb,
-  LucideIcon
+  Bomb
 } from "lucide-react";
-
-export interface Step {
-  id: string;
-  number: number;
-  title: string;
-  subtitle: string;
-  icon: LucideIcon;
-  description: string;
-  why?: string;
-  implementation: string[];
-  codeExample?: {
-    language: string;
-    filename: string;
-    code: string;
-  };
-  comparison?: {
-    wrong: string[];
-    correct: string[];
-  };
-  commonMistakes?: string[];
-  rule: {
-    text: string;
-    warning?: boolean;
-  };
-  keyPoints: string[];
-  checklist?: {
-    title: string;
-    items: string[];
-  };
-}
+import { Step } from "./mentalita";
 
 export const ambienteSteps: Step[] = [
   {
