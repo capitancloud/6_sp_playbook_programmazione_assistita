@@ -8,6 +8,7 @@ import { bestPracticeSteps } from "@/data/module-content/best-practice";
 import { flowControllatoSteps } from "@/data/module-content/flow-controllato";
 import { erroriSteps } from "@/data/module-content/errori";
 import { testSteps } from "@/data/module-content/test";
+import { sicurezzaSteps } from "@/data/module-content/sicurezza";
 import { ModuleHeader } from "@/components/module/ModuleHeader";
 import { StepContent } from "@/components/module/StepContent";
 import { BookOpen, Sparkles, Target, Zap } from "lucide-react";
@@ -37,6 +38,8 @@ const ModulePage = () => {
         return erroriSteps;
       case "test":
         return testSteps;
+      case "sicurezza":
+        return sicurezzaSteps;
       default:
         return null;
     }
