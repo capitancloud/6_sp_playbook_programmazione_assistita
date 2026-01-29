@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { getPromptModuleBySlug } from "@/data/prompt-engineering-modules";
 import { fondamentaSteps } from "@/data/prompt-content/fondamenta";
 import { generazioneCodiceSteps } from "@/data/prompt-content/generazione-codice";
+import { debuggingSteps } from "@/data/prompt-content/debugging";
 import { PromptStepCard } from "@/components/prompt/PromptStepCard";
 import { BookOpen, Wand2, Target, Zap, MessageSquare, Code2 } from "lucide-react";
 
@@ -23,6 +24,8 @@ const PromptModulePage = () => {
         return fondamentaSteps;
       case "generazione-codice":
         return generazioneCodiceSteps;
+      case "debugging":
+        return debuggingSteps;
       default:
         return null;
     }
@@ -103,10 +106,14 @@ const PromptModulePage = () => {
                   </div>
                   <div>
                     <span className="text-xs font-semibold text-accent uppercase tracking-wider">
-                      {slug === "fondamenta" ? "Tecniche di Prompting" : "Tecniche Avanzate"}
+                      {slug === "fondamenta" ? "Tecniche di Prompting" : 
+                       slug === "generazione-codice" ? "Tecniche Avanzate" :
+                       "Tecniche di Debug"}
                     </span>
                     <h3 className="text-xl font-bold text-foreground">
-                      {steps.length} {slug === "fondamenta" ? "Tecniche Fondamentali" : "Tecniche di Generazione"}
+                      {steps.length} {slug === "fondamenta" ? "Tecniche Fondamentali" : 
+                                       slug === "generazione-codice" ? "Tecniche di Generazione" :
+                                       "Tecniche di Debugging"}
                     </h3>
                   </div>
                 </div>
@@ -114,7 +121,9 @@ const PromptModulePage = () => {
                 <p className="text-muted-foreground leading-relaxed mb-6 max-w-2xl">
                   {slug === "fondamenta" 
                     ? "Queste tecniche servono a evitare codice confuso, risposte vaghe e soluzioni inutilizzabili. Qui stai insegnando all'AI in che contesto tecnico esiste e come deve ragionare."
-                    : "Qui non stai più solo \"chiedendo codice\". Qui dirigi attivamente come il codice deve nascere, passo dopo passo, come farebbe uno sviluppatore esperto."
+                    : slug === "generazione-codice"
+                    ? "Qui non stai più solo \"chiedendo codice\". Qui dirigi attivamente come il codice deve nascere, passo dopo passo, come farebbe uno sviluppatore esperto."
+                    : "In questo livello l'AI non serve a \"scrivere codice\", ma a ragionare sul codice che esiste già. L'obiettivo è individuare errori, capirne le cause e correggerli senza distruggere tutto."
                   }
                 </p>
 
