@@ -23,8 +23,10 @@ export interface Step {
     language: string;
     code: string;
   };
-  rule: string;
-  ruleWarning?: boolean;
+  rule: {
+    text: string;
+    warning?: boolean;
+  };
   keyPoints: string[];
   commonMistakes?: string[];
   checklist?: {
@@ -79,7 +81,10 @@ export const consolidamentoSteps: Step[] = [
 - "Funziona ma non so esattamente come"
 - "L'AI ha suggerito questo ma non sono sicuro"`
     },
-    rule: "Ciò che ti dà fastidio a freddo era già un problema a caldo.",
+    rule: {
+      text: "Ciò che ti dà fastidio a freddo era già un problema a caldo.",
+      warning: false
+    },
     keyPoints: [
       "La distanza temporale è l'unico modo per vedere i problemi reali",
       "Leggere senza modificare permette di vedere l'insieme prima dei dettagli",
@@ -169,7 +174,10 @@ function processData(data: unknown): number | null {
 // ✓ Comportamento identico (stesso input → stesso output)
 // ✓ Obiettivo raggiunto`
     },
-    rule: "Refactor mirato migliora, refactor casuale confonde.",
+    rule: {
+      text: "Refactor mirato migliora, refactor casuale confonde.",
+      warning: false
+    },
     keyPoints: [
       "Ogni refactor deve avere un obiettivo esplicito scritto PRIMA di iniziare",
       "Lavora solo sui punti specifici identificati nella rilettura",
@@ -251,7 +259,10 @@ function calculateTotal(items: Item[]): number {
 // - Aggiungere calcolo tasse
 // - Implementare sistema sconti`
     },
-    rule: "Il codice finale deve sembrare scritto con intenzione, non per tentativi.",
+    rule: {
+      text: "Il codice finale deve sembrare scritto con intenzione, non per tentativi.",
+      warning: false
+    },
     keyPoints: [
       "I console.log di debug vanno SEMPRE rimossi — nessuna eccezione",
       "Il codice commentato 'per sicurezza' non serve mai — c'è il version control",
@@ -337,7 +348,10 @@ interface UserData {
 const MAX_RETRY_ATTEMPTS = 3;
 const API_BASE_URL = "https://api.example.com";`
     },
-    rule: "Coerenza batte eleganza.",
+    rule: {
+      text: "Coerenza batte eleganza.",
+      warning: false
+    },
     keyPoints: [
       "Scegli UNO stile e applicalo ovunque — non esiste lo stile 'migliore'",
       "L'AI genera stili diversi: normalizzali attivamente alle tue convenzioni",
@@ -435,7 +449,10 @@ it('should handle empty cart gracefully', () => {
  *   3. Verificare nessun timeout prematuro
  */`
     },
-    rule: "Ogni parte critica senza test è una scommessa.",
+    rule: {
+      text: "Ogni parte critica senza test è una scommessa.",
+      warning: true
+    },
     keyPoints: [
       "Identifica cosa NON è testato — questa è la priorità",
       "Le parti critiche DEVONO avere almeno un test",
@@ -507,7 +524,10 @@ it('should handle empty cart gracefully', () => {
 1. Valori negativi accettati (necessari per rimborsi)
 2. Dati corrotti: skip con log (evento raro, impatto limitato)`
     },
-    rule: "I casi limite ignorati tornano sempre.",
+    rule: {
+      text: "I casi limite ignorati tornano sempre.",
+      warning: true
+    },
     keyPoints: [
       "Riprendi SEMPRE la lista iniziale di edge case",
       "I nuovi casi emersi vanno aggiunti alla lista",
@@ -597,7 +617,10 @@ if (result.success) {
 - v1.1: Fix calcolo IVA su prodotti esenti
 - v1.0: Release iniziale`
     },
-    rule: "Se non è documentato, non esiste.",
+    rule: {
+      text: "Se non è documentato, non esiste.",
+      warning: false
+    },
     keyPoints: [
       "Documenta il 'perché', non solo il 'cosa' — il codice già dice il 'come'",
       "Cosa NON fa è importante quanto cosa fa — evita aspettative sbagliate",
@@ -709,7 +732,10 @@ Da fare:
 
 Non deployare: funzionalità incompleta.`
     },
-    rule: "Il commit è parte del pensiero, non solo del versionamento.",
+    rule: {
+      text: "Il commit è parte del pensiero, non solo del versionamento.",
+      warning: false
+    },
     keyPoints: [
       "Ogni commit deve rispondere a: cosa? perché? cosa resta?",
       "Messaggi generici ('fix', 'update') sono inutili — evitali sempre",
@@ -796,7 +822,10 @@ Non deployare: funzionalità incompleta.`
 | Duplicazione sconti | Basso | Modifica logica |
 | TypeScript strict | Medio | Nuovo dev in team |`
     },
-    rule: "Debito tecnico non scritto = debito infinito.",
+    rule: {
+      text: "Debito tecnico non scritto = debito infinito.",
+      warning: true
+    },
     keyPoints: [
       "Scrivi cosa hai rimandato — se è solo nella tua testa, non esiste per gli altri",
       "Scrivi perché E quando affrontarlo — 'prima o poi' non è un trigger",
@@ -893,8 +922,10 @@ Documentare cosa non ha funzionato per evitare di ripetere.
 Ho dichiarato lo stato. Il lavoro è archiviato.
 Passo ad altra attività. Tornerò con mente fresca.`
     },
-    rule: "Una sessione chiusa bene vale più di una lunga.",
-    ruleWarning: false,
+    rule: {
+      text: "Una sessione chiusa bene vale più di una lunga.",
+      warning: false
+    },
     keyPoints: [
       "Dichiara SEMPRE uno stato esplicito — non lasciare il lavoro 'in sospeso'",
       "SCRIVERE chiude il loop mentale — pensare non basta",
