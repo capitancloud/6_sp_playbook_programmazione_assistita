@@ -40,9 +40,16 @@ export const fondamentaSteps: PromptStep[] = [
 **Errore comune:** Dare per scontato che l'AI "capisca" dal codice che incolli. Non lo fa. Ogni prompt è una conversazione nuova senza memoria implicita del tuo stack.`,
     prompts: [
       {
-        text: `Scrivi codice in Python 3.11, pensato per essere eseguito su Linux.
+        text: `Contesto tecnico:
+- Linguaggio: Python 3.11
+- Sistema operativo: Linux (Ubuntu 22.04)
+- Ambiente: virtualenv isolato
+- Dipendenze disponibili: solo libreria standard
+- Editor: VS Code con estensione Python
 
-Il codice deve essere compatibile con ambienti virtualenv e non usare librerie esterne.`
+Il codice deve essere compatibile con questo ambiente.
+Non usare librerie esterne che richiedono pip install.
+Usa type hints per migliorare la leggibilità.`
       }
     ]
   },
@@ -60,9 +67,19 @@ Il codice deve essere compatibile con ambienti virtualenv e non usare librerie e
 **Effetto pratico:** Lo stesso problema, con ruoli diversi, produce soluzioni completamente diverse. Il ruolo non è decorativo: cambia strutturalmente l'output.`,
     prompts: [
       {
-        text: `Agisci come uno sviluppatore backend senior con esperienza in codice pulito e manutenibile.
+        text: `Agisci come uno sviluppatore backend senior con 10+ anni di esperienza.
 
-Ragiona prima sulla struttura e poi scrivi il codice.`
+Il tuo approccio:
+- Privilegi codice pulito, leggibile e manutenibile
+- Pensi sempre alla gestione degli errori
+- Consideri i casi limite prima di scrivere
+- Usi nomi di variabili e funzioni espressivi
+- Eviti soluzioni "clever" a favore di soluzioni chiare
+
+Prima di scrivere codice:
+1. Ragiona brevemente sulla struttura
+2. Identifica i punti critici
+3. Solo dopo implementa la soluzione`
       }
     ]
   },
@@ -80,9 +97,17 @@ Ragiona prima sulla struttura e poi scrivi il codice.`
 **Errore comune:** Fingere un livello superiore per "risparmiare spiegazioni". Risultato: codice che non capisci e che non puoi mantenere o debuggare.`,
     prompts: [
       {
-        text: `Considera che sono un principiante: conosco le basi del linguaggio ma non pattern avanzati.
+        text: `Il mio livello di competenza:
+- Conosco le basi di Python (variabili, funzioni, cicli, liste)
+- Ho usato dizionari ma non sono esperto
+- Non ho mai usato decoratori o context manager
+- Non conosco la programmazione orientata agli oggetti
+- Capisco cosa fa un try/except ma non li uso spesso
 
-Evita soluzioni troppo complesse.`
+Calibra le tue risposte su questo livello:
+- Evita pattern avanzati senza spiegarli
+- Preferisci soluzioni con costrutti base
+- Se usi qualcosa di nuovo, spiega brevemente perché`
       }
     ]
   },
@@ -100,9 +125,27 @@ Evita soluzioni troppo complesse.`
 **Tecnica avanzata:** Includi un esempio concreto. "Dato il file users.txt con righe 'mario,30' e 'lucia,25', deve stampare 'mario ha 30 anni'." L'esempio disambigua meglio di mille parole.`,
     prompts: [
       {
-        text: `L'obiettivo del codice è:
+        text: `Obiettivo funzionale:
+Creare una funzione che conta la frequenza delle parole in un file.
 
-dato un file di testo, contare quante volte appare ogni parola e stampare il risultato ordinato per frequenza.`
+Input:
+- Percorso di un file di testo (.txt)
+- Il file contiene testo in italiano con punteggiatura
+
+Elaborazione:
+- Leggere il contenuto del file
+- Rimuovere la punteggiatura
+- Convertire tutto in minuscolo
+- Contare le occorrenze di ogni parola
+
+Output:
+- Dizionario {parola: conteggio}
+- Ordinato per frequenza decrescente
+- Stampato a schermo in formato leggibile
+
+Esempio:
+File: "Ciao mondo. Ciao a tutti."
+Output atteso: ciao: 2, mondo: 1, a: 1, tutti: 1`
       }
     ]
   },
@@ -120,11 +163,25 @@ dato un file di testo, contare quante volte appare ogni parola e stampare il ris
 **Errore comune:** Dimenticare vincoli ovvi per te ma non per l'AI. "Non usare async" se il tuo ambiente non lo supporta. "Non usare typing" se sei su Python 2. L'AI non sa cosa "non puoi" usare.`,
     prompts: [
       {
-        text: `Vincoli:
+        text: `Vincoli tecnici da rispettare:
 
-- non usare librerie esterne
-- evitare strutture dati complesse
-- codice leggibile e facilmente modificabile`
+Librerie:
+- Solo libreria standard Python
+- Niente numpy, pandas, o dipendenze esterne
+- Niente requests (uso urllib se serve HTTP)
+
+Stile:
+- Massimo 80 caratteri per riga
+- Funzioni sotto le 20 righe
+- Nomi variabili in inglese, commenti in italiano
+
+Performance:
+- Deve gestire file fino a 10MB
+- Tempo massimo accettabile: 5 secondi
+
+Compatibilità:
+- Python 3.8+ (no walrus operator se evitabile)
+- Deve funzionare su Windows e Linux`
       }
     ]
   },
@@ -142,12 +199,28 @@ dato un file di testo, contare quante volte appare ogni parola e stampare il ris
 **Formati utili:** "Solo codice" per integrazione veloce. "Codice + spiegazione separata" per capire. "Diff" per modifiche a codice esistente. "Pseudocodice" per ragionare sulla logica prima dell'implementazione.`,
     prompts: [
       {
-        text: `Restituisci solo il codice finale, senza spiegazioni testuali.`,
-        label: "Opzione 1"
+        text: `Formato output richiesto:
+
+1. SOLO CODICE
+   - Nessuna spiegazione prima o dopo
+   - Nessun commento inline (tranne docstring)
+   - Codice pronto per copia-incolla
+   - Include gli import necessari all'inizio`,
+        label: "Solo codice"
       },
       {
-        text: `Restituisci prima il codice e poi una breve spiegazione separata.`,
-        label: "Opzione 2"
+        text: `Formato output richiesto:
+
+1. CODICE COMPLETO
+   - Con docstring per ogni funzione
+   - Import all'inizio
+
+2. SPIEGAZIONE (dopo il codice)
+   - Cosa fa ogni funzione principale
+   - Scelte implementative e perché
+   - Possibili miglioramenti futuri
+   - Come testare il codice`,
+        label: "Codice + spiegazione"
       }
     ]
   },
@@ -165,9 +238,24 @@ dato un file di testo, contare quante volte appare ogni parola e stampare il ris
 **Principio guida:** Se devi rileggere una riga tre volte per capirla, è troppo complessa. Chiedi la versione "naive" o "esplicita" e spesso sarà migliore.`,
     prompts: [
       {
-        text: `Privilegia la semplicità e la leggibilità rispetto all'ottimizzazione.
+        text: `Principi di stile da seguire:
 
-Scrivi codice che potrei spiegare a un junior.`
+Leggibilità sopra tutto:
+- Preferisci cicli for espliciti a list comprehension complesse
+- Una operazione per riga, non concatenare
+- Nomi di variabili che spiegano il contenuto
+- Nomi di funzioni che spiegano l'azione
+
+Semplicità:
+- Se puoi farlo in modo semplice, fallo semplice
+- Evita lambda se una funzione normale è più chiara
+- Niente ternary operator annidati
+- Niente "tricks" del linguaggio
+
+Test mentale:
+- Il codice deve essere spiegabile a un junior in 2 minuti
+- Ogni funzione deve avere uno scopo ovvio dal nome
+- Il flusso deve essere lineare e prevedibile`
       }
     ]
   },
@@ -185,7 +273,25 @@ Scrivi codice che potrei spiegare a un junior.`
 **Quando usarlo:** Prototipi, script one-off, esplorazione di API, test di concetti. Quando il codice è "usa e getta" o "dimostrazione di fattibilità". Per codice di produzione, altri vincoli diventano più importanti.`,
     prompts: [
       {
-        text: `Scrivi la soluzione più minimale possibile, evitando classi o astrazioni non necessarie.`
+        text: `Requisiti di minimalismo:
+
+Struttura:
+- Soluzione più corta possibile
+- Niente classi, solo funzioni
+- Niente file separati, tutto in un modulo
+- Niente configurazione esterna
+
+Evita:
+- Pattern come Factory, Strategy, Observer
+- Astrazioni "per il futuro"
+- Gestione errori per casi improbabili
+- Logging, metrics, monitoring
+- Docstring elaborate
+
+Obiettivo:
+- Codice che risolve SOLO il problema dato
+- Massimo 50 righe totali
+- Eseguibile con: python script.py`
       }
     ]
   },
@@ -203,9 +309,22 @@ Scrivi codice che potrei spiegare a un junior.`
 **Regola pratica:** Se il prompt contiene "e poi", "e anche", "inoltre", probabilmente stai chiedendo troppo. Ogni "e" è un potenziale punto di rottura.`,
     prompts: [
       {
-        text: `In questo prompt occupati solo della lettura del file.
+        text: `Scope di questo prompt: SOLO lettura file
 
-Non implementare altre funzionalità.`
+Quello che voglio:
+- Una funzione read_data(filepath) 
+- Legge un file CSV
+- Restituisce una lista di dizionari
+
+Quello che NON voglio in questo prompt:
+- Validazione dei dati
+- Trasformazione dei dati  
+- Salvataggio su database
+- Gestione di formati diversi da CSV
+- Interfaccia utente
+
+Questi verranno gestiti in prompt separati.
+Concentrati solo sulla lettura pulita del file.`
       }
     ]
   },
@@ -223,9 +342,23 @@ Non implementare altre funzionalità.`
 **Quando è essenziale:** Algoritmi complessi, logica con molti branch, trasformazioni di dati articolate. Qualsiasi cosa dove "il come" non è ovvio.`,
     prompts: [
       {
-        text: `Prima scrivi lo pseudocodice ad alto livello.
+        text: `Approccio richiesto: PSEUDOCODICE FIRST
 
-Solo dopo converti lo pseudocodice in codice reale.`
+Step 1 - Pseudocodice in italiano:
+- Descrivi la logica ad alto livello
+- Usa frasi semplici, non codice
+- Numera i passaggi principali
+- Indica dove servono cicli o condizioni
+- Evidenzia i casi limite
+
+Step 2 - Revisione:
+- Aspetta la mia conferma sul pseudocodice
+- Posso chiedere modifiche alla logica
+
+Step 3 - Implementazione:
+- Solo dopo mia conferma, converti in Python
+- Segui esattamente la struttura del pseudocodice
+- Ogni passaggio del pseudocodice = commento nel codice`
       }
     ]
   },
@@ -243,9 +376,31 @@ Solo dopo converti lo pseudocodice in codice reale.`
 **Tecnica avanzata:** Dopo aver ricevuto codice indesiderato, aggiungi quel pattern alla lista dei "non". "Non usare enumerate" se continua a proporlo. L'AI impara dai vincoli espliciti.`,
     prompts: [
       {
-        text: `Non usare programmazione orientata agli oggetti.
+        text: `Lista esplicita di cosa NON fare:
 
-Non usare funzionalità avanzate del linguaggio.`
+Paradigmi:
+- NON usare classi o programmazione OOP
+- NON usare decoratori
+- NON usare metaclassi o descriptors
+
+Costrutti:
+- NON usare list comprehension annidate
+- NON usare lambda functions
+- NON usare walrus operator (:=)
+- NON usare match/case (Python 3.10+)
+
+Pattern:
+- NON implementare pattern GoF
+- NON usare dependency injection
+- NON creare interfacce/protocolli
+
+Librerie:
+- NON suggerire librerie esterne
+- NON usare asyncio
+- NON usare multiprocessing
+
+Se qualcosa di questa lista sembra necessario,
+chiedi prima invece di procedere.`
       }
     ]
   }
