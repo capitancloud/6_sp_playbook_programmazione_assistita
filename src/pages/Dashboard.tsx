@@ -1,6 +1,8 @@
 import { modules } from "@/data/modules";
+import { promptEngineeringModules } from "@/data/prompt-engineering-modules";
 import { ModuleCard } from "@/components/ModuleCard";
-import { BookOpen, Zap, Target } from "lucide-react";
+import { PromptModuleCard } from "@/components/PromptModuleCard";
+import { BookOpen, Zap, Target, Wand2 } from "lucide-react";
 
 const Dashboard = () => {
   return (
@@ -84,6 +86,29 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {modules.map((module, index) => (
             <ModuleCard key={module.id} module={module} index={index} />
+          ))}
+        </div>
+      </section>
+
+      {/* Prompt Engineering Section */}
+      <section className="p-8 border-t border-border">
+        <div className="mb-8">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center">
+              <Wand2 className="w-5 h-5 text-accent" />
+            </div>
+            <h2 className="text-xl font-semibold text-foreground">
+              Tecniche di Prompt Engineering
+            </h2>
+          </div>
+          <p className="text-sm text-muted-foreground ml-13">
+            Tecniche avanzate per comunicare efficacemente con l'AI durante lo sviluppo software.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {promptEngineeringModules.map((module, index) => (
+            <PromptModuleCard key={module.id} module={module} index={index} />
           ))}
         </div>
       </section>
