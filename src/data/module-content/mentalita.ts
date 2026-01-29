@@ -1,13 +1,26 @@
+import { LucideIcon, Lightbulb, GitMerge, Target, FileEdit, Shield, RefreshCw, StopCircle, BarChart3, TrendingUp, CheckCircle2 } from "lucide-react";
+
 export interface Step {
-  id: number;
+  id: string | number;
+  number?: number;
   title: string;
   subtitle: string;
+  icon?: LucideIcon;
   description: string;
-  why: string;
+  why?: string;
   implementation: string[];
   example?: {
     type: "code" | "comparison" | "checklist";
     content: any;
+  };
+  codeExample?: {
+    language: string;
+    filename: string;
+    code: string;
+  };
+  comparison?: {
+    wrong: string[];
+    correct: string[];
   };
   rule: {
     text: string;
@@ -15,6 +28,10 @@ export interface Step {
   };
   keyPoints: string[];
   commonMistakes?: string[];
+  checklist?: {
+    title: string;
+    items: string[];
+  };
 }
 
 export const mentalitaSteps: Step[] = [
