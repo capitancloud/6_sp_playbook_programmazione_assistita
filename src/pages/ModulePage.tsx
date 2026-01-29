@@ -10,6 +10,7 @@ import { erroriSteps } from "@/data/module-content/errori";
 import { testSteps } from "@/data/module-content/test";
 import { sicurezzaSteps } from "@/data/module-content/sicurezza";
 import { consolidamentoSteps } from "@/data/module-content/consolidamento";
+import { evoluzioneSteps } from "@/data/module-content/evoluzione";
 import { ModuleHeader } from "@/components/module/ModuleHeader";
 import { StepContent } from "@/components/module/StepContent";
 import { BookOpen, Sparkles, Target, Zap } from "lucide-react";
@@ -43,6 +44,8 @@ const ModulePage = () => {
         return sicurezzaSteps;
       case "consolidamento":
         return consolidamentoSteps;
+      case "evoluzione":
+        return evoluzioneSteps;
       default:
         return null;
     }
