@@ -67,8 +67,8 @@ export const promptEngineeringModules: PromptModule[] = [
     shortTitle: "Comprensione",
     description: "Usare l'AI per capire codice complesso, legacy o scritto da altri.",
     icon: BookOpen,
-    status: "coming-soon",
-    estimatedSteps: 7,
+    status: "complete",
+    estimatedSteps: 10,
   },
   {
     id: 6,
