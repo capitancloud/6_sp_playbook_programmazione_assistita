@@ -219,22 +219,26 @@ Se apro qualcos'altro → devo giustificarlo`
       "Considera di usare app che bloccano le notifiche per periodi definiti"
     ],
     codeExample: {
-      language: "bash",
-      filename: "focus-mode.sh",
-      code: `#!/bin/bash
-# Script per attivare modalità focus (macOS)
+      language: "plaintext",
+      filename: "focus-checklist.md",
+      code: `# Checklist modalità focus
+─────────────────────────────
 
-# Attiva Do Not Disturb
-osascript -e 'tell application "System Events" to keystroke "D" using {command down, shift down, option down}'
+PRIMA DI INIZIARE:
+  □ Attivare "Non disturbare" (sistema operativo)
+  □ Chiudere Slack / Teams / WhatsApp
+  □ Disattivare notifiche email
+  □ Silenziare notifiche browser
+  □ Telefono in altra stanza o aereo
 
-# Chiudi app di comunicazione
-osascript -e 'quit app "Slack"'
-osascript -e 'quit app "Mail"'
-osascript -e 'quit app "Messages"'
+DURANTE LA SESSIONE:
+  ✗ Non controllare "velocemente" i messaggi
+  ✗ Non lasciare badge visibili
+  ✗ Non pensare "rispondo tra 5 minuti"
 
-echo "🔕 Modalità focus attivata"
-echo "📱 Ricorda: telefono in silenzioso"
-echo "⏱️  Sessione iniziata: $(date +%H:%M)"`
+PERCHÉ È IMPORTANTE:
+  Una notifica durante la valutazione del codice AI
+  → quasi sempre porta ad accettarlo senza pensare`
     },
     comparison: {
       wrong: [
@@ -422,25 +426,31 @@ Domanda chiave:
       "Fai commit frequenti per poter tornare a stati precedenti"
     ],
     codeExample: {
-      language: "bash",
-      filename: "session-start.sh",
-      code: `#!/bin/bash
-# Inizio sessione AI-assisted
+      language: "plaintext",
+      filename: "branch-naming.md",
+      code: `# Convenzioni branch sperimentali
+──────────────────────────────────
 
-# 1. Crea branch sperimentale con timestamp
-BRANCH_NAME="ai-experiment/$(date +%Y%m%d-%H%M)"
-git checkout -b "$BRANCH_NAME"
+PREFISSI CONSIGLIATI:
+  ai-experiment/   → esperimenti con AI
+  ai-prototype/    → prototipi rapidi
+  ai-validation/   → validazione approcci
 
-echo "🔬 Branch sperimentale creato: $BRANCH_NAME"
-echo ""
-echo "Ricorda:"
-echo "  - Questo branch può essere buttato"
-echo "  - Nessuna pressione a 'salvare' codice mediocre"
-echo "  - Commit frequenti per poter tornare indietro"
-echo ""
-echo "Alla fine della sessione:"
-echo "  git diff main  # Guarda cosa è cambiato"
-echo "  git checkout main && git branch -D $BRANCH_NAME  # Se da buttare"`
+ESEMPI:
+  ai-experiment/validazione-input
+  ai-prototype/nuovo-layout-form
+  ai-validation/refactor-auth
+
+WORKFLOW:
+  1. Crea branch → git checkout -b ai-experiment/nome
+  2. Lavora liberamente
+  3. Commit frequenti per checkpoint
+  4. A fine sessione: valuta se merita merge
+  5. Se no → git branch -D (senza rimorsi)
+
+MENTALITÀ:
+  Questo branch può essere buttato.
+  Nessuna pressione a salvare codice mediocre.`
     },
     comparison: {
       wrong: [
@@ -498,32 +508,32 @@ echo "  git checkout main && git branch -D $BRANCH_NAME  # Se da buttare"`
       "Mantieni un README aggiornato con i passi essenziali"
     ],
     codeExample: {
-      language: "bash",
-      filename: "quick-start.sh",
-      code: `#!/bin/bash
-# Setup rapido - deve funzionare in <5 minuti
+      language: "plaintext",
+      filename: "setup-checklist.md",
+      code: `# Setup riproducibile - Checklist
+──────────────────────────────────
 
-echo "🚀 Setup rapido del progetto"
+REQUISITI MINIMI:
+  ✓ package.json con tutte le dipendenze
+  ✓ .env.example con variabili documentate
+  ✓ README con passi di setup
 
-# 1. Dipendenze
-npm install
+VERIFICA (deve funzionare in <5 min):
+  1. git clone [repo]
+  2. npm install (o equivalente)
+  3. cp .env.example .env
+  4. npm run dev
+  → Applicazione funzionante
 
-# 2. Variabili d'ambiente
-if [ ! -f .env ]; then
-  cp .env.example .env
-  echo "⚠️  Configura .env con le tue credenziali"
-fi
+SEGNALI DI ALLARME:
+  ✗ "Devi anche installare X manualmente"
+  ✗ "La chiave API è sul mio computer"
+  ✗ "Funziona solo se hai fatto Y prima"
+  ✗ "Chiedi a Marco, lui sa come si fa"
 
-# 3. Database (se necessario)
-npm run db:setup
-
-# 4. Verifica
-npm run dev &
-sleep 5
-curl -s http://localhost:3000/health | grep "ok" && echo "✅ Tutto pronto!"
-
-# Test: questo script deve portarti da zero a funzionante
-# Se richiede interventi manuali, non è pronto per AI-assisted coding`
+DOMANDA CHIAVE:
+  Se formatto il PC, riparto in 5 minuti?
+  → Se NO, documenta quello che manca`
     },
     comparison: {
       wrong: [
