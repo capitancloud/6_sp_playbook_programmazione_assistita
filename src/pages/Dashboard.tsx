@@ -5,6 +5,11 @@ import { PromptModuleCard } from "@/components/PromptModuleCard";
 import { BookOpen, Zap, Target, Wand2 } from "lucide-react";
 
 const Dashboard = () => {
+  const totalMethodSteps = modules.reduce((acc, m) => acc + m.estimatedSteps, 0);
+  const totalPromptSteps = promptEngineeringModules.reduce((acc, m) => acc + m.estimatedSteps, 0);
+  const totalSteps = totalMethodSteps + totalPromptSteps;
+  const totalModules = modules.length + promptEngineeringModules.length;
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -55,7 +60,7 @@ const Dashboard = () => {
                 <Target className="w-4 h-4 text-foreground" />
               </div>
               <div>
-                <span className="font-semibold text-foreground">10</span>
+                <span className="font-semibold text-foreground">{totalModules}</span>
                 <span className="text-muted-foreground ml-1">moduli</span>
               </div>
             </div>
@@ -64,7 +69,7 @@ const Dashboard = () => {
                 <Zap className="w-4 h-4 text-foreground" />
               </div>
               <div>
-                <span className="font-semibold text-foreground">72</span>
+                <span className="font-semibold text-foreground">{totalSteps}</span>
                 <span className="text-muted-foreground ml-1">step totali</span>
               </div>
             </div>
