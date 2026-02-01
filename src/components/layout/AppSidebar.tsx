@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useState } from "react";
+import { LogoutButton } from "./LogoutButton";
 
 export const AppSidebar = () => {
   const location = useLocation();
@@ -177,13 +178,18 @@ export const AppSidebar = () => {
       </ScrollArea>
 
       {/* Footer */}
-      {!isCollapsed && (
-        <div className="p-4 border-t border-sidebar-border">
-          <p className="text-xs text-muted-foreground text-center">
-            Playbook Interattivo v1.0
-          </p>
-        </div>
-      )}
+      <div className="p-4 border-t border-sidebar-border">
+        {!isCollapsed ? (
+          <div className="space-y-3">
+            <LogoutButton />
+            <p className="text-xs text-muted-foreground text-center">
+              Playbook Interattivo v1.0
+            </p>
+          </div>
+        ) : (
+          <LogoutButton />
+        )}
+      </div>
     </aside>
   );
 };
