@@ -62,8 +62,7 @@ const LoginPage = () => {
         </svg>
       </div>
 
-      {/* Logo - positioned above the card */}
-      <div className="mb-6 relative z-10">
+      <div className="mb-6 relative z-10 animate-float">
         <img 
           src={superProgrammatoreLogo} 
           alt="Super Programmatore Logo" 
