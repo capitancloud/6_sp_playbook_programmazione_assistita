@@ -6,7 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { validateCode, setAuthenticated } from "@/lib/auth";
-import { Lock, Sparkles, Eye, EyeOff } from "lucide-react";
+import { Lock, Eye, EyeOff } from "lucide-react";
+import superProgrammatoreLogo from "@/assets/super-programmatore-logo.png";
 
 const LoginPage = () => {
   const [code, setCode] = useState("");
@@ -61,11 +62,17 @@ const LoginPage = () => {
         </svg>
       </div>
 
+      {/* Logo */}
+      <div className="mb-8 relative z-10">
+        <img 
+          src={superProgrammatoreLogo} 
+          alt="Super Programmatore Logo" 
+          className="w-64 md:w-80 h-auto mx-auto drop-shadow-2xl"
+        />
+      </div>
+
       <Card className="w-full max-w-md relative z-10 border-primary/20 bg-card/80 backdrop-blur-sm shadow-2xl">
         <CardHeader className="text-center space-y-4">
-          <div className="mx-auto w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center">
-            <Lock className="w-8 h-8 text-primary" />
-          </div>
           <div>
             <CardTitle className="text-2xl font-bold text-foreground">
               Accesso Riservato
@@ -73,10 +80,6 @@ const LoginPage = () => {
             <CardDescription className="text-muted-foreground mt-2">
               Inserisci il codice di accesso per entrare nella piattaforma
             </CardDescription>
-          </div>
-          <div className="flex items-center justify-center gap-2 text-sm text-primary">
-            <Sparkles className="w-4 h-4" />
-            <span className="font-medium">Programmazione Assistita dall'AI</span>
           </div>
         </CardHeader>
         
