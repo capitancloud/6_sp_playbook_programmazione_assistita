@@ -38,7 +38,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10" />
       <div className="absolute top-20 left-20 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-pulse" />
@@ -62,12 +62,12 @@ const LoginPage = () => {
         </svg>
       </div>
 
-      {/* Logo */}
-      <div className="mb-8 relative z-10">
+      {/* Logo - positioned above the card */}
+      <div className="mb-6 relative z-10">
         <img 
           src={superProgrammatoreLogo} 
           alt="Super Programmatore Logo" 
-          className="w-64 md:w-80 h-auto mx-auto drop-shadow-2xl"
+          className="w-48 md:w-64 h-auto mx-auto drop-shadow-2xl"
         />
       </div>
 
